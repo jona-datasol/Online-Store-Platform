@@ -19,7 +19,7 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 ## Capacidades Clave de Ingenieria
 
 - **Configuracion 100% Dinamica:** Identidad de marca, colores (con contraste automatico WCAG 2.2 AA), moneda, impuestos, numero/horario WhatsApp y politicas gestionadas desde la interfaz administrativa (`site_settings`).
-- **Diseno Mobile First y Accesibilidad:** Sistema de diseno modular (*Precision Retail*), areas tactiles >= 44px, tablas administrativas adaptativas y estandar WCAG 2.2 AA.
+- **Diseno Mobile First y Accesibilidad:** Sistema de diseno modular (_Precision Retail_), areas tactiles >= 44px, tablas administrativas adaptativas y estandar WCAG 2.2 AA.
 - **Integridad Comercial y Seguridad:** Recalculo de precios/promociones en servidor, bloqueo transaccional `FOR UPDATE` contra sobreventa, snapshots inmutables en pedidos, inventario append-only y politicas RLS Fail Closed.
 - **Flujo WhatsApp Transaccional:** Persistencia previa obligatoria en base de datos con `idempotency_key` antes de generar el enlace prellenado de WhatsApp y respaldo de copiado.
 
@@ -28,7 +28,8 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 - **Fase 0 — Reconocimiento y Gobernanza:** Completada.
 - **Sprint 1 — Arquitectura, Producto, Seguridad, Design System y Toolchain CI/CD:** Completado y aprobado.
 - **Sprint 2 — Migraciones SQL/RLS/Storage (auditadas), Capa Base de Servicios/Errores, Libreria UI Base y Motor Dinamico de Temas (WCAG 2.2 AA):** Completado y aprobado (29 pruebas unitarias en verde).
-- **Sprint 3 — MVP Publico (Catalogo, Ficha de Producto, Carrito y Flujo Transaccional WhatsApp):** Siguiente iteracion.
+- **Sprint 3 — MVP Publico (Catalogo Mobile First, Ficha de Producto con Variantes/JSON-LD, Carrito Persistente y Flujo Transaccional WhatsApp):** Completado y aprobado (43 pruebas unitarias en verde).
+- **Sprint 4 — MVP Administrativo (Auth Admin, CRUD Catalogo/Storage, Inventario Trazable, Pedidos, Clientes y Configuracion Dinamica `site_settings`):** Siguiente iteracion.
 
 ## Autoria y Propiedad Intelectual
 
