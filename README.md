@@ -23,6 +23,24 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 - **Integridad Comercial y Seguridad:** Recalculo de precios/promociones en servidor, bloqueo transaccional `FOR UPDATE` contra sobreventa, snapshots inmutables en pedidos, inventario append-only y politicas RLS Fail Closed.
 - **Flujo WhatsApp Transaccional:** Persistencia previa obligatoria en base de datos con `idempotency_key` antes de generar el enlace prellenado de WhatsApp y respaldo de copiado.
 
+## Arquitectura de 5 Capas y Flujo Transaccional
+
+```mermaid
+flowchart LR
+  UI["Presentacion Mobile First (React + Tailwind v4)"] --> APP["Aplicacion (TanStack Query + Hooks + Context)"]
+  APP --> DOMAIN["Negocio y Validacion (Zod v4 + WCAG Theme Engine)"]
+  DOMAIN --> DATA["Acceso a Datos (Capa de Servicios + AppError)"]
+  DATA --> DB["Supabase (PostgreSQL + RLS Fail Closed + Transacciones)"]
+  DB -. "Folio verificado" .-> WA["Enlace WhatsApp + Fallback Copiado"]
+```
+
+## Retos de Ingenieria Resueltos
+
+- **Tematizacion dinamica accesible (WCAG 2.2 AA):** Sanitizacion estricta HEX anti-inyeccion CSS, calculo deterministico de luminancia relativa y derivacion automatica de colores de texto/borde con ratio >= 4.5:1 en tiempo real (`src/lib/theme.ts`).
+- **Optimizacion de rendimiento y bundle:** Particionado determinista de vendors (`manualChunks`) combinado con `React.lazy` en rutas administrativas y secundarias, reduciendo el chunk inicial de `782.97 kB` a **`278.97 kB` (`86.61 kB` gzip)** sin advertencias de tamano.
+- **Integridad comercial y anti-sobreventa:** Recalculo de precios/promociones en servidor, bloqueo determinista de filas en operaciones criticas, inventario append-only y snapshots inmutables en pedidos.
+- **Seguridad Fail Closed y privacidad:** Politicas RLS por defecto denegadas, sanitizacion automatica de PII en la capa de errores (`src/lib/errors.ts`), whitelist estricta de imagenes sin SVG ejecutable y pruebas automatizadas contra fugas de secretos (`tests/unit/securityBundle.test.ts`).
+
 ## Estado del Proyecto (Roadmap)
 
 - **Fase 0 — Reconocimiento y Gobernanza:** Completada.
@@ -31,7 +49,7 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 - **Sprint 3 — MVP Publico (Catalogo Mobile First, Ficha de Producto con Variantes/JSON-LD, Carrito Persistente y Flujo Transaccional WhatsApp):** Completado y aprobado (43 pruebas unitarias en verde).
 - **Sprint 4 — MVP Administrativo (Auth Admin Fail Closed, CRUD Catalogo/Storage, Inventario Trazable, Pedidos 8 Estados, Clientes, Configuracion Dinamica `site_settings` con Vista Previa WCAG 2.2 AA y Code Splitting `React.lazy`):** Completado y aprobado (51 pruebas unitarias en verde).
 - **Sprint 5 — Promociones, Reportes Reales en Servidor, Optimizacion de Bundle (`index.js` `278.97 kB` / `86.61 kB` gzip, 0 warnings) y Suite QA E2E Playwright (4 viewports Mobile First):** Completado y aprobado (57 pruebas unitarias en verde).
-- **Sprint 6 — Release Readiness y Despliegue a Produccion:** Siguiente paso.
+- **Sprint 6 — Release Readiness v1.0.0 y Despliegue a Produccion:** Completado y verificado.
 
 ## Contenido Verificable de Este Repositorio Publico (Portafolio)
 
