@@ -30,7 +30,8 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 - **Sprint 2 — Migraciones SQL/RLS/Storage (auditadas), Capa Base de Servicios/Errores, Libreria UI Base y Motor Dinamico de Temas (WCAG 2.2 AA):** Completado y aprobado (29 pruebas unitarias en verde).
 - **Sprint 3 — MVP Publico (Catalogo Mobile First, Ficha de Producto con Variantes/JSON-LD, Carrito Persistente y Flujo Transaccional WhatsApp):** Completado y aprobado (43 pruebas unitarias en verde).
 - **Sprint 4 — MVP Administrativo (Auth Admin Fail Closed, CRUD Catalogo/Storage, Inventario Trazable, Pedidos 8 Estados, Clientes, Configuracion Dinamica `site_settings` con Vista Previa WCAG 2.2 AA y Code Splitting `React.lazy`):** Completado y aprobado (51 pruebas unitarias en verde).
-- **Sprint 5 — Promociones, Reportes Reales (`get_admin_dashboard_metrics`), Optimizacion (`manualChunks`) y Suite QA E2E Playwright (4 viewports):** Siguiente iteracion.
+- **Sprint 5 — Promociones, Reportes Reales (`get_admin_dashboard_metrics`), Optimizacion de Bundle (`index.js` `278.97 kB` / `86.61 kB` gzip, 0 warnings) y Suite QA E2E Playwright (4 viewports Mobile First):** Completado y aprobado (57 pruebas unitarias en verde).
+- **Sprint 6 — Release Readiness y Despliegue a Produccion (`pirotecniajm.vercel.app` + Supabase Produccion):** Siguiente paso.
 
 ## Autoria y Propiedad Intelectual
 
