@@ -23,6 +23,13 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 - **Integridad Comercial y Seguridad:** Recalculo de precios/promociones en servidor, bloqueo transaccional `FOR UPDATE` contra sobreventa, snapshots inmutables en pedidos, inventario append-only y politicas RLS Fail Closed.
 - **Flujo WhatsApp Transaccional:** Persistencia previa obligatoria en base de datos con `idempotency_key` antes de generar el enlace prellenado de WhatsApp y respaldo de copiado.
 
+## Estado del Proyecto (Roadmap)
+
+- **Fase 0 — Reconocimiento y Gobernanza:** Completada.
+- **Sprint 1 — Arquitectura, Producto, Seguridad, Design System y Toolchain CI/CD:** Completado y aprobado.
+- **Sprint 2 — Migraciones SQL/RLS/Storage (auditadas), Capa Base de Servicios/Errores, Libreria UI Base y Motor Dinamico de Temas (WCAG 2.2 AA):** Completado y aprobado (29 pruebas unitarias en verde).
+- **Sprint 3 — MVP Publico (Catalogo, Ficha de Producto, Carrito y Flujo Transaccional WhatsApp):** Siguiente iteracion.
+
 ## Autoria y Propiedad Intelectual
 
 Disenado, arquitectado y desarrollado exclusivamente por **[JoNa](https://github.com/jona-datasol)**.  
