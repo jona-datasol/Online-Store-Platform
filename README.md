@@ -30,8 +30,19 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 - **Sprint 2 — Migraciones SQL/RLS/Storage (auditadas), Capa Base de Servicios/Errores, Libreria UI Base y Motor Dinamico de Temas (WCAG 2.2 AA):** Completado y aprobado (29 pruebas unitarias en verde).
 - **Sprint 3 — MVP Publico (Catalogo Mobile First, Ficha de Producto con Variantes/JSON-LD, Carrito Persistente y Flujo Transaccional WhatsApp):** Completado y aprobado (43 pruebas unitarias en verde).
 - **Sprint 4 — MVP Administrativo (Auth Admin Fail Closed, CRUD Catalogo/Storage, Inventario Trazable, Pedidos 8 Estados, Clientes, Configuracion Dinamica `site_settings` con Vista Previa WCAG 2.2 AA y Code Splitting `React.lazy`):** Completado y aprobado (51 pruebas unitarias en verde).
-- **Sprint 5 — Promociones, Reportes Reales (`get_admin_dashboard_metrics`), Optimizacion de Bundle (`index.js` `278.97 kB` / `86.61 kB` gzip, 0 warnings) y Suite QA E2E Playwright (4 viewports Mobile First):** Completado y aprobado (57 pruebas unitarias en verde).
-- **Sprint 6 — Release Readiness y Despliegue a Produccion (`pirotecniajm.vercel.app` + Supabase Produccion):** Siguiente paso.
+- **Sprint 5 — Promociones, Reportes Reales en Servidor, Optimizacion de Bundle (`index.js` `278.97 kB` / `86.61 kB` gzip, 0 warnings) y Suite QA E2E Playwright (4 viewports Mobile First):** Completado y aprobado (57 pruebas unitarias en verde).
+- **Sprint 6 — Release Readiness y Despliegue a Produccion:** Siguiente paso.
+
+## Contenido Verificable de Este Repositorio Publico (Portafolio)
+
+Para acreditar la ingenieria real y autoria exclusiva de **[JoNa](https://github.com/jona-datasol)** protegiendo la propiedad intelectual y la seguridad del backend privado, este repositorio publico incluye una seleccion auditada de modulos reutilizables, pruebas y configuracion de produccion:
+
+- **Motor Dinamico de Temas WCAG 2.2 AA:** `src/lib/theme.ts`, `src/styles/tokens.css` y `tests/unit/theme.test.ts` (sanitizacion HEX anti-inyeccion CSS, calculo deterministico de luminancia/contraste y tokens semanticos Tailwind v4).
+- **Libreria UI Mobile First (10 primitivos):** `src/components/ui/` (`Button`, `Input`, `Badge`, `Alert`, `Card`, `DataTable` con Stacked Card List `< 768px`, `EmptyState`, `Modal`, `Skeleton`).
+- **Taxonomia de Errores y Tipos Base:** `src/lib/errors.ts`, `src/types/common.ts` y `tests/unit/errors.test.ts` (`ServiceResult<T>`, `AppError`, sanitizacion PII).
+- **Seguridad y Calidad Automatizada:** `tests/unit/securityBundle.test.ts`, `eslint.config.js`, `tsconfig*.json` (Strict), `vite.config.ts` (`manualChunks`), `vitest.config.ts`, `playwright.config.ts` (4 viewports Mobile First) y `vercel.json` (headers de seguridad HTTP).
+
+> Los modulos de negocio llave en mano (`src/modules/`, `src/services/`), las migraciones SQL/RLS/RPC (`supabase/`) y la documentacion interna permanecen en el repositorio privado de **JoNa**.
 
 ## Autoria y Propiedad Intelectual
 

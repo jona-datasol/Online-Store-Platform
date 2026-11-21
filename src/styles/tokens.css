@@ -1,0 +1,198 @@
+/* Online Store Platform — Semantic Design Tokens (Author: JoNa — https://github.com/jona-datasol)
+ * Precision Retail base palette, typography, spacing, radii, elevation, and motion tokens.
+ * Aligned with docs/design/DESIGN_SYSTEM.md and docs/design/COLOR_TOKENS.md (WCAG 2.2 AA).
+ */
+
+:root {
+  /* Protected surfaces, text, and borders */
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f9fafb;
+  --color-surface-variant: #f3f4f6;
+  --color-surface-inverse: #111827;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-text-inverse: #ffffff;
+
+  --color-border: #e5e7eb;
+  --color-border-strong: #6b7280;
+  --color-overlay: rgb(17 24 39 / 0.5);
+
+  /* Default brand palette (overridable safely via site_settings -> src/lib/theme.ts) */
+  --color-primary: #18181b;
+  --color-primary-hover: #27272a;
+  --color-primary-active: #09090b;
+  --color-primary-soft: #f4f4f5;
+  --color-primary-text: #18181b;
+  --color-on-primary: #ffffff;
+  --color-primary-border: transparent;
+
+  --color-secondary: #3f3f46;
+  --color-secondary-hover: #52525b;
+  --color-secondary-active: #27272a;
+  --color-secondary-soft: #f4f4f5;
+  --color-on-secondary: #ffffff;
+
+  --color-accent: #0f766e;
+  --color-accent-hover: #115e59;
+  --color-accent-soft: #f0fdfa;
+  --color-accent-text: #0f766e;
+  --color-on-accent: #ffffff;
+
+  /* Protected semantic feedback states */
+  --color-success: #15803d;
+  --color-success-soft: #f0fdf4;
+  --color-success-text: #166534;
+
+  --color-warning: #b45309;
+  --color-warning-soft: #fffbeb;
+  --color-warning-text: #92400e;
+
+  --color-error: #b91c1c;
+  --color-error-soft: #fef2f2;
+  --color-error-text: #991b1b;
+
+  --color-info: #1d4ed8;
+  --color-info-soft: #eff6ff;
+  --color-info-text: #1e40af;
+
+  /* Interactive states */
+  --color-focus-ring: var(--color-primary-text);
+  --color-disabled-bg: #e5e7eb;
+  --color-disabled-text: #6b7280;
+  --color-disabled-border: #d1d5db;
+  --color-selected-bg: var(--color-primary-soft);
+  --color-selected-border: var(--color-primary-text);
+
+  /* Typography */
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing scale (base 4px) */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* Border radii */
+  --radius-none: 0px;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Controlled elevation */
+  --shadow-elevation-0: none;
+  --shadow-elevation-1: 0 1px 2px 0 rgb(17 24 39 / 0.06), 0 1px 3px 0 rgb(17 24 39 / 0.04);
+  --shadow-elevation-2: 0 4px 12px -2px rgb(17 24 39 / 0.08), 0 2px 4px -2px rgb(17 24 39 / 0.04);
+  --shadow-elevation-3: 0 16px 32px -8px rgb(17 24 39 / 0.14), 0 4px 12px -4px rgb(17 24 39 / 0.06);
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-normal: 180ms;
+  --duration-slow: 260ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@theme inline {
+  /* Semantic colors mapped to CSS variables for dynamic runtime theming */
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-subtle: var(--color-surface-subtle);
+  --color-surface-variant: var(--color-surface-variant);
+  --color-surface-inverse: var(--color-surface-inverse);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-overlay: var(--color-overlay);
+
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-active: var(--color-primary-active);
+  --color-primary-soft: var(--color-primary-soft);
+  --color-primary-text: var(--color-primary-text);
+  --color-on-primary: var(--color-on-primary);
+  --color-primary-border: var(--color-primary-border);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-hover: var(--color-secondary-hover);
+  --color-secondary-active: var(--color-secondary-active);
+  --color-secondary-soft: var(--color-secondary-soft);
+  --color-on-secondary: var(--color-on-secondary);
+
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-accent-text: var(--color-accent-text);
+  --color-on-accent: var(--color-on-accent);
+
+  --color-success: var(--color-success);
+  --color-success-soft: var(--color-success-soft);
+  --color-success-text: var(--color-success-text);
+
+  --color-warning: var(--color-warning);
+  --color-warning-soft: var(--color-warning-soft);
+  --color-warning-text: var(--color-warning-text);
+
+  --color-error: var(--color-error);
+  --color-error-soft: var(--color-error-soft);
+  --color-error-text: var(--color-error-text);
+
+  --color-info: var(--color-info);
+  --color-info-soft: var(--color-info-soft);
+  --color-info-text: var(--color-info-text);
+
+  --color-focus-ring: var(--color-focus-ring);
+  --color-disabled-bg: var(--color-disabled-bg);
+  --color-disabled-text: var(--color-disabled-text);
+  --color-disabled-border: var(--color-disabled-border);
+  --color-selected-bg: var(--color-selected-bg);
+  --color-selected-border: var(--color-selected-border);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Elevations */
+  --shadow-elevation-0: var(--shadow-elevation-0);
+  --shadow-elevation-1: var(--shadow-elevation-1);
+  --shadow-elevation-2: var(--shadow-elevation-2);
+  --shadow-elevation-3: var(--shadow-elevation-3);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
