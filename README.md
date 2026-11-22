@@ -50,6 +50,10 @@ flowchart LR
 - **Sprint 4 — MVP Administrativo (Auth Admin Fail Closed, CRUD Catalogo/Storage, Inventario Trazable, Pedidos 8 Estados, Clientes, Configuracion Dinamica `site_settings` con Vista Previa WCAG 2.2 AA y Code Splitting `React.lazy`):** Completado y aprobado (51 pruebas unitarias en verde).
 - **Sprint 5 — Promociones, Reportes Reales en Servidor, Optimizacion de Bundle (`index.js` `278.97 kB` / `86.61 kB` gzip, 0 warnings) y Suite QA E2E Playwright (4 viewports Mobile First):** Completado y aprobado (57 pruebas unitarias en verde).
 - **Sprint 6 — Release Readiness `v1.0.1` y Verificacion en Produccion:** Completado y aprobado (59 pruebas unitarias + **20/20 pruebas E2E Playwright en vivo** en los 4 viewports Mobile First).
+- **Sprint 7 — Multimedia WebP, Recorte Interactivo y Personalizacion (`v1.1.0`):** Completado (conversion automatica a WebP + cropper multi-proporcion, galerias multi-imagen, carga directa de logo/favicon y paletas rapidas).
+- **Sprint 8 — Crecimiento, SEO Pro, Multi-Variantes y Hardening (`v1.2.0`):** Completado (`/sitemap.xml` dinamico, Open Graph por producto para crawlers de WhatsApp/redes, gestor multi-variantes y cabeceras CSP/HSTS/Permissions-Policy).
+- **Sprint 9 — Brand Immersion, Redes Sociales Dinamicas y Analista IA (`v1.3.0`):** Completado (submenu de configuracion en sidebar, motor ilimitado de redes sociales con auto-deteccion de icono/color oficial, vista previa en vivo y Dashboard Data Analyst asistido por IA).
+- **Sprint 10 — Telemetria de Visitantes, Contacto Directo y Gestion de Equipo (`v1.4.0`):** Completado (segmentacion por pais/ciudad/tiempo activo e interacciones excluyendo equipo interno, contacto directo por producto a redes de la empresa, iconos de sidebar con paleta dinamica y modulo `/admin/usuarios`; **75/75 pruebas unitarias** en 17 suites).
 
 ## Contenido Verificable de Este Repositorio Publico (Portafolio)
 
