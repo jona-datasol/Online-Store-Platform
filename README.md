@@ -87,14 +87,23 @@ flowchart LR
 - **Sprint 11 — Estabilidad, WhatsApp Cloud API Ready y Modos de Visibilidad (`v1.5.0`):** Completado (hidratacion automatica del carrito tras recarga, auto-recuperacion ante chunks obsoletos + `RouteErrorBoundary`, submenus separados `WhatsApp` vs `Redes sociales`, integracion preparada WhatsApp Cloud API con candado `$0 < 24h`, y modos dinamicos `show_prices` / `show_stock`).
 - **Sprint 12 — Hardening Enterprise BD y Analitica Verificable de 4 Capas (`v1.6.0`):** Completado (FK compuesta `(product_id, variant_id)`, constraints compuestos en `promotions`, trigger SQL de transiciones de estado en `orders`, trigger recursivo anti-ciclos en `categories`, coherencia matematica en `orders`, idempotencia en `inventory_movements`, rate-limit server-side + same-origin en telemetria, pronostico estadistico de ingresos y Days of Supply + metadatos de calidad de datos; **10/10 pruebas negativas verificadas en PostgreSQL** + **81/81 pruebas unitarias** en 19 suites).
 
+## Documentacion Tecnica Sanitizada (Architecture Showcase)
+
+Para facilitar la evaluacion tecnica por parte de CTOs y arquitectos sin exponer el codigo propietario del backend, se publican documentos sanitizados de diseno e integridad:
+
+- [ADR_SUMMARY.md](docs/architecture/ADR_SUMMARY.md) — Decisiones arquitectonicas clave (5 capas, `FOR UPDATE`, idempotencia WhatsApp, Fail Closed, analitica de 4 capas).
+- [ERD_OVERVIEW.md](docs/architecture/ERD_OVERVIEW.md) — Diagrama entidad-relacion simplificado e invariantes de integridad garantizadas en PostgreSQL.
+- [THREAT_MODEL_AND_RBAC.md](docs/architecture/THREAT_MODEL_AND_RBAC.md) — Modelo de amenazas (OWASP/Supabase) y matriz de permisos por rol.
+- [TRANSACTIONAL_FLOW_AND_CONCURRENCY.md](docs/architecture/TRANSACTIONAL_FLOW_AND_CONCURRENCY.md) — Secuencia transaccional del checkout WhatsApp y matriz de resultados de pruebas negativas y de concurrencia.
+
 ## Contenido Verificable de Este Repositorio Publico (Portafolio)
 
 Para acreditar la ingenieria real y autoria exclusiva de **[JoNa](https://github.com/jona-datasol)** protegiendo la propiedad intelectual y la seguridad del backend privado, este repositorio publico incluye una seleccion auditada de modulos reutilizables, pruebas y configuracion de produccion:
 
-- **Motor Dinamico de Temas WCAG 2.2 AA:** `src/lib/theme.ts`, `src/styles/tokens.css` y `tests/unit/theme.test.ts` (sanitizacion HEX anti-inyeccion CSS, calculo deterministico de luminancia/contraste y tokens semanticos Tailwind v4).
-- **Libreria UI Mobile First (10 primitivos):** `src/components/ui/` (`Button`, `Input`, `Badge`, `Alert`, `Card`, `DataTable` con Stacked Card List `< 768px`, `EmptyState`, `Modal`, `Skeleton`).
-- **Taxonomia de Errores y Tipos Base:** `src/lib/errors.ts`, `src/types/common.ts` y `tests/unit/errors.test.ts` (`ServiceResult<T>`, `AppError`, sanitizacion PII).
-- **Seguridad y Calidad Automatizada:** `tests/unit/securityBundle.test.ts`, `eslint.config.js`, `tsconfig*.json` (Strict), `vite.config.ts` (`manualChunks`), `vitest.config.ts`, `playwright.config.ts` (4 viewports Mobile First) y `vercel.json` (headers de seguridad HTTP).
+- **Motor Dinamico de Temas WCAG 2.2 AA:** `src/lib/theme.ts`, `src/styles/tokens.css` y `tests/unit/theme.test.ts` (sanitizacion HEX anti-inyeccion CSS, linealizacion sRGB WCAG 2.1/2.2 `0.04045`, contraste bidireccional para superficies claras/oscuras y tokens semanticos Tailwind v4).
+- **Libreria UI Mobile First (9 primitivos):** `src/components/ui/` (`Alert`, `Badge`, `Button`, `Card`, `DataTable` con Stacked Card List `< 768px`, `EmptyState`, `Input`, `Modal`, `Skeleton` + barrel `index.ts`).
+- **Taxonomia de Errores y Tipos Base:** `src/lib/errors.ts`, `src/types/common.ts` y `tests/unit/errors.test.ts` (`ServiceResult<T>`, `AppError`, sanitizacion Fail Closed por allowlist `SAFE_ERROR_META_KEYS`).
+- **Seguridad y Calidad Automatizada:** `tests/unit/securityBundle.test.ts` (escaneo de secretos en codigo cliente y bundle compilado `dist/`, complementado con secret scanning en CI), `eslint.config.js`, `tsconfig*.json` (Strict), `vite.config.ts` (`manualChunks`), `vitest.config.ts`, `playwright.config.ts` (4 viewports Mobile First) y `vercel.json` (headers de seguridad HTTP).
 
 > Los modulos de negocio llave en mano (`src/modules/`, `src/services/`), las migraciones SQL/RLS/RPC (`supabase/`) y la documentacion interna permanecen en el repositorio privado de **JoNa**.
 

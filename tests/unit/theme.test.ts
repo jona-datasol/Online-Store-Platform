@@ -67,6 +67,14 @@ describe('WCAG 2.2 AA luminance and contrast calculations', () => {
     expect(getContrastRatio('#0F766E', '#FFFFFF')).toBeGreaterThan(5.4);
   });
 
+  it('uses the WCAG 2.1/2.2 sRGB linearization threshold (0.04045) at channel boundaries 10 and 11', () => {
+    // Channel 10/255 = 0.0392157 <= 0.04045 -> linear segment (srgb / 12.92)
+    expect(getRelativeLuminance('#0A0A0A')).toBeCloseTo(10 / 255 / 12.92, 6);
+    // Channel 11/255 = 0.0431373 > 0.04045 -> gamma segment (((srgb + 0.055) / 1.055) ** 2.4)
+    const expectedGamma = ((11 / 255 + 0.055) / 1.055) ** 2.4;
+    expect(getRelativeLuminance('#0B0B0B')).toBeCloseTo(expectedGamma, 6);
+  });
+
   it('selects #FFFFFF on dark brand colors and #111827 on light brand colors with >= 4.5:1 contrast', () => {
     const darkColors = ['#18181B', '#1D4ED8', '#0F766E', '#7C2D12', '#111827'];
     for (const hex of darkColors) {
@@ -107,6 +115,24 @@ describe('WCAG 2.2 AA luminance and contrast calculations', () => {
     const { color, adjusted } = deriveAccessibleTextColor('#0F766E', LIGHT_SURFACE_HEX);
     expect(adjusted).toBe(false);
     expect(color).toBe('#0F766E');
+  });
+
+  it('lightens low-contrast brand colors when deriving accessible text on dark surfaces', () => {
+    const darkSurfaces = ['#000000', '#18181B', '#0F172A'];
+    const lowContrastOnDark = ['#1E293B', '#0F766E', '#1D4ED8', '#7C2D12', '#111827'];
+
+    for (const surface of darkSurfaces) {
+      for (const brandHex of lowContrastOnDark) {
+        const { color, adjusted } = deriveAccessibleTextColor(brandHex, surface);
+        expect(adjusted).toBe(true);
+        expect(isValidHexColor(color)).toBe(true);
+        expect(getContrastRatio(color, surface)).toBeGreaterThanOrEqual(WCAG_AA_NORMAL_TEXT_RATIO);
+      }
+    }
+
+    const alreadyAccessibleOnDark = deriveAccessibleTextColor('#FACC15', '#18181B');
+    expect(alreadyAccessibleOnDark.adjusted).toBe(false);
+    expect(alreadyAccessibleOnDark.color).toBe('#FACC15');
   });
 
   it('applies a visible accessible border token when primary brand color is ultra-light', () => {

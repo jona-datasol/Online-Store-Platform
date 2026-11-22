@@ -12,6 +12,8 @@ export const LIGHT_SURFACE_HEX = '#FFFFFF';
 export const DARK_ON_COLOR_HEX = '#111827';
 export const LIGHT_ON_COLOR_HEX = '#FFFFFF';
 export const WCAG_AA_NORMAL_TEXT_RATIO = 4.5;
+export const WCAG_SRGB_LINEAR_THRESHOLD = 0.04045;
+export const WCAG_SURFACE_LUMINANCE_MIDPOINT = 0.1791287847;
 
 export const DEFAULT_BRAND_PALETTE = {
   primaryColor: '#18181B',
@@ -176,7 +178,7 @@ function mixWithWhite(hex: string, brandWeight: number): string {
 
 function linearizeChannel(channel255: number): number {
   const srgb = channel255 / 255;
-  return srgb <= 0.03928 ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4;
+  return srgb <= WCAG_SRGB_LINEAR_THRESHOLD ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4;
 }
 
 export function getRelativeLuminance(hex: string): number {
@@ -207,22 +209,29 @@ export function deriveAccessibleTextColor(
   minContrast: number = WCAG_AA_NORMAL_TEXT_RATIO
 ): { color: string; adjusted: boolean } {
   const normalized = sanitizeHexColor(brandHex, DEFAULT_BRAND_PALETTE.primaryColor);
-  if (getContrastRatio(normalized, surfaceHex) >= minContrast) {
+  const normalizedSurface = sanitizeHexColor(surfaceHex, LIGHT_SURFACE_HEX);
+
+  if (getContrastRatio(normalized, normalizedSurface) >= minContrast) {
     return { color: normalized, adjusted: false };
   }
+
+  const surfaceLuminance = getRelativeLuminance(normalizedSurface);
+  const shouldDarken = surfaceLuminance >= WCAG_SURFACE_LUMINANCE_MIDPOINT;
+  const step = shouldDarken ? -0.02 : 0.02;
+  const fallbackColor = shouldDarken ? DARK_ON_COLOR_HEX : LIGHT_ON_COLOR_HEX;
 
   const baseHsl = rgbToHsl(hexToRgb(normalized));
   let currentL = baseHsl.l;
 
-  while (currentL > 0) {
-    currentL = Math.max(0, Number((currentL - 0.02).toFixed(4)));
+  while (shouldDarken ? currentL > 0 : currentL < 1) {
+    currentL = Math.max(0, Math.min(1, Number((currentL + step).toFixed(4))));
     const candidate = rgbToHex(hslToRgb({ ...baseHsl, l: currentL }));
-    if (getContrastRatio(candidate, surfaceHex) >= minContrast) {
+    if (getContrastRatio(candidate, normalizedSurface) >= minContrast) {
       return { color: candidate, adjusted: true };
     }
   }
 
-  return { color: DARK_ON_COLOR_HEX, adjusted: true };
+  return { color: fallbackColor, adjusted: true };
 }
 
 function deriveInteractiveStates(hex: string): {

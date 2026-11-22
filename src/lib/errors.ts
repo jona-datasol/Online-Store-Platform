@@ -101,27 +101,53 @@ export interface CreateAppErrorInput<
   readonly meta?: Readonly<TMeta>;
 }
 
-const PII_KEYS = new Set([
-  'phone',
-  'customer_phone',
-  'customerPhone',
-  'phone_e164',
-  'phoneE164',
-  'email',
-  'customer_email',
-  'customerEmail',
-  'address',
-  'delivery_address',
-  'deliveryAddress',
-  'address_summary',
-  'customer_name',
-  'customerName',
-  'full_name',
-  'fullName',
-  'password',
-  'token',
-  'access_token',
+const SAFE_ERROR_META_KEYS = new Set([
+  'items',
+  'variantId',
+  'variant_id',
+  'productId',
+  'product_id',
+  'sku',
+  'orderId',
+  'order_id',
+  'orderNumber',
+  'order_number',
+  'requested',
+  'available',
+  'quantity',
+  'maxQuantity',
+  'max_quantity',
+  'previousPrice',
+  'previous_price',
+  'expectedPrice',
+  'expected_price',
+  'currentPrice',
+  'current_price',
+  'fromStatus',
+  'from_status',
+  'toStatus',
+  'to_status',
+  'currentStatus',
+  'current_status',
+  'status',
+  'minOrderAmount',
+  'min_order_amount',
+  'maxUses',
+  'max_uses',
+  'currentUses',
+  'current_uses',
+  'retryAfterSeconds',
+  'retry_after_seconds',
+  'field',
+  'constraint',
+  'promotionCode',
+  'promotion_code',
+  'maxBytes',
+  'receivedBytes',
+  'mimeType',
 ]);
+
+const MAX_ERROR_META_DEPTH = 3;
 
 const BUSINESS_ERROR_DEFAULTS: Readonly<
   Record<
@@ -276,23 +302,48 @@ export function isAppError(value: unknown): value is AppError {
   );
 }
 
-export function sanitizeErrorMeta(raw: Record<string, unknown>): Record<string, unknown> {
+export function sanitizeErrorMeta(
+  raw: Record<string, unknown>,
+  depth = 0
+): Record<string, unknown> {
+  if (depth >= MAX_ERROR_META_DEPTH) {
+    return {};
+  }
+
   const sanitized: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(raw)) {
-    if (PII_KEYS.has(key)) {
+    if (!SAFE_ERROR_META_KEYS.has(key)) {
       continue;
     }
 
     if (Array.isArray(value)) {
-      sanitized[key] = value.map((item) =>
-        typeof item === 'object' && item !== null && !Array.isArray(item)
-          ? sanitizeErrorMeta(item as Record<string, unknown>)
-          : item
-      );
+      const cleanItems = value
+        .map((item) => {
+          if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
+            const nested = sanitizeErrorMeta(item as Record<string, unknown>, depth + 1);
+            return Object.keys(nested).length > 0 ? nested : null;
+          }
+          if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+            return item;
+          }
+          return null;
+        })
+        .filter((item): item is string | number | boolean | Record<string, unknown> => item !== null);
+
+      if (cleanItems.length > 0) {
+        sanitized[key] = cleanItems;
+      }
     } else if (typeof value === 'object' && value !== null) {
-      sanitized[key] = sanitizeErrorMeta(value as Record<string, unknown>);
-    } else {
+      const nested = sanitizeErrorMeta(value as Record<string, unknown>, depth + 1);
+      if (Object.keys(nested).length > 0) {
+        sanitized[key] = nested;
+      }
+    } else if (
+      typeof value === 'string' ||
+      typeof value === 'number' ||
+      typeof value === 'boolean'
+    ) {
       sanitized[key] = value;
     }
   }

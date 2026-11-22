@@ -171,19 +171,28 @@ describe('errors — AppError taxonomy and mapSupabaseError', () => {
     }
   });
 
-  it('recursively removes sensitive PII keys in sanitizeErrorMeta', () => {
+  it('enforces strict Fail-Closed allowlist in sanitizeErrorMeta and drops PII and unknown keys', () => {
     const clean = sanitizeErrorMeta({
       orderId: 'ord-99',
       phone: '5215500000000',
-      nested: {
-        delivery_address: 'Calle 123',
-        sku: 'SKU-1',
-      },
+      whatsapp_number: '50499999999',
+      dni: '0801-1990-00001',
+      ip_address: '198.51.100.12',
+      raw_sql_detail: 'Key (email)=(secret@example.com) already exists',
+      items: [
+        {
+          sku: 'SKU-1',
+          requested: 3,
+          available: 1,
+          delivery_address: 'Calle 123',
+          internal_notes: 'VIP client',
+        },
+      ],
     });
 
     expect(clean).toEqual({
       orderId: 'ord-99',
-      nested: { sku: 'SKU-1' },
+      items: [{ sku: 'SKU-1', requested: 3, available: 1 }],
     });
   });
 });
