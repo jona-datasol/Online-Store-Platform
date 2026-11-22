@@ -13,6 +13,8 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 
 ## Vista Previa en Produccion
 
+### Tienda Publica (Storefront Mobile First)
+
 | Catalogo Publico (Desktop) | Modal Multi-Imagen y Contacto Directo |
 | :---: | :---: |
 | ![Catalogo Publico Desktop](docs/screenshots/01-storefront-desktop.png) | ![Modal de Producto Multi-Imagen](docs/screenshots/02-product-quick-view.png) |
@@ -21,6 +23,19 @@ Plataforma comercial hibrida de comercio electronico disenada bajo estandares se
 <summary>Ver vista Mobile First (390px)</summary>
 <p align="center">
   <img src="docs/screenshots/03-storefront-mobile.png" alt="Catalogo Mobile First 390px" width="320" />
+</p>
+</details>
+
+### Panel Administrativo (Operacion, Analitica IA y Configuracion)
+
+| Analisis Inteligente IA (4 Capas y Calidad de Datos) | Configuracion Dinamica y Vista Previa WCAG 2.2 AA |
+| :---: | :---: |
+| ![Panel Admin Analisis IA](docs/screenshots/04-admin-ai-analytics.png) | ![Panel Admin Configuracion y Vista Previa WCAG](docs/screenshots/05-admin-settings-preview.png) |
+
+<details>
+<summary>Ver gestion de catalogo administrativo (Multi-Imagen WebP y Variantes)</summary>
+<p align="center">
+  <img src="docs/screenshots/06-admin-products.png" alt="Panel Admin Gestion de Productos" width="900" />
 </p>
 </details>
 
