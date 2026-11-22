@@ -25,7 +25,7 @@ export default defineConfig({
     {
       name: 'mobile-standard-390',
       use: {
-        ...devices['iPhone 14'],
+        ...devices['Pixel 5'],
         viewport: { width: 390, height: 844 },
       },
     },
@@ -44,9 +44,11 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: 'npm run preview -- --host 127.0.0.1 --port 4173',
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: process.env.PLAYWRIGHT_BASE_URL
+    ? undefined
+    : {
+        command: 'npm run preview -- --host 127.0.0.1 --port 4173',
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+      },
 });

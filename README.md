@@ -49,7 +49,7 @@ flowchart LR
 - **Sprint 3 — MVP Publico (Catalogo Mobile First, Ficha de Producto con Variantes/JSON-LD, Carrito Persistente y Flujo Transaccional WhatsApp):** Completado y aprobado (43 pruebas unitarias en verde).
 - **Sprint 4 — MVP Administrativo (Auth Admin Fail Closed, CRUD Catalogo/Storage, Inventario Trazable, Pedidos 8 Estados, Clientes, Configuracion Dinamica `site_settings` con Vista Previa WCAG 2.2 AA y Code Splitting `React.lazy`):** Completado y aprobado (51 pruebas unitarias en verde).
 - **Sprint 5 — Promociones, Reportes Reales en Servidor, Optimizacion de Bundle (`index.js` `278.97 kB` / `86.61 kB` gzip, 0 warnings) y Suite QA E2E Playwright (4 viewports Mobile First):** Completado y aprobado (57 pruebas unitarias en verde).
-- **Sprint 6 — Release Readiness v1.0.0 y Despliegue a Produccion:** Completado y verificado.
+- **Sprint 6 — Release Readiness `v1.0.1` y Verificacion en Produccion:** Completado y aprobado (59 pruebas unitarias + **20/20 pruebas E2E Playwright en vivo** en los 4 viewports Mobile First).
 
 ## Contenido Verificable de Este Repositorio Publico (Portafolio)
 
