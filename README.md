@@ -9,6 +9,21 @@
 
 Plataforma comercial hibrida de comercio electronico disenada bajo estandares senior de ingenieria de software: catalogo online publico Mobile First + solicitudes transaccionales de compra mediante WhatsApp + panel administrativo responsive con inventario trazable y configuracion 100% dinamica desde la interfaz.
 
+**Demo en produccion:** [https://pirotecniajm.vercel.app](https://pirotecniajm.vercel.app)
+
+## Vista Previa en Produccion
+
+| Catalogo Publico (Desktop) | Modal Multi-Imagen y Contacto Directo |
+| :---: | :---: |
+| ![Catalogo Publico Desktop](docs/screenshots/01-storefront-desktop.png) | ![Modal de Producto Multi-Imagen](docs/screenshots/02-product-quick-view.png) |
+
+<details>
+<summary>Ver vista Mobile First (390px)</summary>
+<p align="center">
+  <img src="docs/screenshots/03-storefront-mobile.png" alt="Catalogo Mobile First 390px" width="320" />
+</p>
+</details>
+
 ## Arquitectura y Stack Tecnologico
 
 - **Frontend:** React, TypeScript (Strict), Vite, Tailwind CSS v4, React Router, TanStack Query, Zod, Lucide Icons.
